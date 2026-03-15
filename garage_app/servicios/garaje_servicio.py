@@ -32,3 +32,17 @@ class GarajeServicio:
     def listar_vehiculos(self):
         """Devuelve la lista de vehículos registrados."""
         return self._vehiculos
+    
+    def total_vehiculos(self):
+        """Devuelve la cantidad total de vehículos registrados."""
+        return len(self._vehiculos)
+
+    def _buscar_vehiculo_por_placa(self, placa: str):
+        """Busca un vehículo por placa dentro de la lista."""
+        placa_buscada = placa.strip().upper()
+
+        for vehiculo in self._vehiculos:
+            if vehiculo.placa == placa_buscada:
+                return vehiculo
+
+        return None
