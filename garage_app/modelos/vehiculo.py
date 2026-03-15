@@ -6,3 +6,14 @@ class Vehiculo:
         self.placa = placa
         self.marca = marca
         self.propietario = propietario
+
+    @property
+    def placa(self):
+        return self._placa
+
+    @placa.setter
+    def placa(self, value):
+        # La placa se guarda sin espacios extra y en mayúsculas
+        # para que todas tengan el mismo formato.
+        self._placa = value.strip().upper()
+
