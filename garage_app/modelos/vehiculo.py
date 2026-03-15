@@ -25,3 +25,12 @@ class Vehiculo:
     def marca(self, value):
         # Se eliminan espacios innecesarios antes de guardar la marca.
         self._marca = value.strip()
+
+    @property
+    def propietario(self):
+        return self._propietario
+
+    @propietario.setter
+    def propietario(self, value):
+        # Se limpia el nombre del propietario antes de almacenarlo.
+        self._propietario = value.strip()
