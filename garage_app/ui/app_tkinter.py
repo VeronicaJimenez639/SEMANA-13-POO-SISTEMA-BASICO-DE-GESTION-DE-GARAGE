@@ -114,3 +114,45 @@ class AppTkinter:
         # Esta etiqueta muestra cuántos vehículos hay registrados.
         self.etiqueta_total = tk.Label(self.root, text="Total de vehículos: 0")
         self.etiqueta_total.pack(pady=10)
+
+    def _agregar_vehiculo(self):
+        """Obtiene los datos del formulario y registra el vehículo."""
+        placa = self.variable_placa.get()
+        marca = self.variable_marca.get()
+        propietario = self.variable_propietario.get()
+
+        exito, mensaje = self.servicio.agregar_vehiculo(placa, marca, propietario)
+
+        if exito:
+            self._actualizar_lista()
+            self._limpiar_campos()
+            messagebox.showinfo("Registro exitoso", mensaje)
+        else:
+            messagebox.showwarning("Error", mensaje)
+
+    def _limpiar_campos(self):
+        """Limpia los campos del formulario."""
+        self.variable_placa.set("")
+        self.variable_marca.set("")
+        self.variable_propietario.set("")
+
+        # Devuelve el cursor al primer campo para facilitar un nuevo registro.
+        self.entrada_placa.focus()
+
+    def _actualizar_lista(self):
+        """Actualiza la lista con los vehículos registrados."""
+        # Se borra el contenido actual para volver a cargar la información.
+        self.lista_vehiculos.delete(0, tk.END)
+
+        # Se recorren todos los vehículos guardados en el servicio.
+        for vehiculo in self.servicio.listar_vehiculos():
+            texto = (
+                f"Placa: {vehiculo.placa} | "
+                f"Marca: {vehiculo.marca} | "
+                f"Propietario: {vehiculo.propietario}"
+            )
+            self.lista_vehiculos.insert(tk.END, texto)
+
+        # Se actualiza el total mostrado en pantalla.
+        total = self.servicio.total_vehiculos()
+        self.etiqueta_total.config(text=f"Total de vehículos: {total}")
