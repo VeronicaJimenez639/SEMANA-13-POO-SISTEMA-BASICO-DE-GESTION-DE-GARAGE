@@ -34,3 +34,11 @@ class Vehiculo:
     def propietario(self, value):
         # Se limpia el nombre del propietario antes de almacenarlo.
         self._propietario = value.strip()
+
+    def __repr__(self):
+        # Permite ver el objeto de forma clara durante pruebas o depuración.
+        return (
+            f"Vehiculo(placa={self.placa}, "
+            f"marca={self.marca}, "
+            f"propietario={self.propietario})"
+        )
