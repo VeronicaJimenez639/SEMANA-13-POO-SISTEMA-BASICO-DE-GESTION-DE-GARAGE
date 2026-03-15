@@ -17,3 +17,11 @@ class Vehiculo:
         # para que todas tengan el mismo formato.
         self._placa = value.strip().upper()
 
+    @property
+    def marca(self):
+        return self._marca
+
+    @marca.setter
+    def marca(self, value):
+        # Se eliminan espacios innecesarios antes de guardar la marca.
+        self._marca = value.strip()
